@@ -11,11 +11,11 @@ public class Rectangle implements Shape {
     private Color fillColor;
     private Map<String, Double> properties;
 
-    public Rectangle(double length,double width, Point position) {
-        this.color = Color.WHITE;
+    public Rectangle(double height,double width, Point position) {
+        this.color = Color.BLACK;
         this.position = position;
         properties = new HashMap<>();
-        properties.put("length", length);
+        properties.put("height", height);
         properties.put("width", width);
     }
 
@@ -61,8 +61,19 @@ public class Rectangle implements Shape {
 
     @Override
     public void draw(Graphics canvas) {
-        double length = this.properties.get("length").doubleValue();
-        double width  = this.properties.get("width").doubleValue();
+        double width = this.properties.get("width");
+        double height = this.properties.get("height");
+        int x = this.position.x;
+        int y = this.position.y;
 
+        if (this.color != null) {
+            canvas.setColor(this.color);
+            canvas.drawRect(x, y, (int) width, (int) height);
+        }
+
+        if (this.fillColor != null) {
+            canvas.setColor(this.fillColor);
+            canvas.fillRect(x, y, (int) width, (int) height);
+        }
     }
 }

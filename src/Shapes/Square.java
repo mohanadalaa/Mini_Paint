@@ -12,7 +12,7 @@ public class Square implements Shape {
     private Map<String, Double> properties;
 
     public Square(double length, Point position) {
-        this.color = Color.WHITE;
+        this.color = Color.BLACK;
         this.position = position;
         properties = new HashMap<>();
         properties.put("length", length);
@@ -60,7 +60,17 @@ public class Square implements Shape {
 
     @Override
     public void draw(Graphics canvas) {
-        double length = this.properties.get("length").doubleValue();
+        int length = (int)this.properties.get("length").doubleValue();
+        int x = this.position.x;
+        int y = this.position.y;
 
+        if(this.color!=null){
+            canvas.setColor(this.color);
+            canvas.drawRect(x,y,length,length);
+        }
+        if(this.fillColor!=null){
+            canvas.setColor(this.fillColor);
+            canvas.fillRect(x,y,length,length);
+        }
     }
 }

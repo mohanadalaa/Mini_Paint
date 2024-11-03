@@ -21,6 +21,8 @@ public class TestCircle extends JPanel {
     public static void main(String[] args) {
         JFrame frame = new JFrame("Test Circle");
         TestCircle panel = new TestCircle();
+
+
         frame.add(panel);
         frame.setSize(400, 400);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

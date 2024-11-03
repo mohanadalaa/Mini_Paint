@@ -14,7 +14,7 @@ public class Circle implements Shape {
     public Circle(double radius,Point position)
     {
         this.position = position;
-        this.color = Color.WHITE;
+        this.color = Color.BLACK;
         this.properties = new HashMap<>();
         this.properties.put("radius", radius);
     }
@@ -62,20 +62,19 @@ public class Circle implements Shape {
     @Override
     public void draw(Graphics canvas) {
         double radius = this.properties.get("radius");
-        double xCor = this.position.x - radius;
-        double yCor = this.position.y - radius;
+        double x = this.position.x - radius;
+        double y = this.position.y - radius;
+
         int diameter = (int) (2 * radius);
-        int x = (int) xCor;
-        int y = (int) yCor;
 
-        // Set the color for the outline
-        canvas.setColor(this.color);
-        canvas.drawOval(x, y, diameter, diameter);
+        if(this.color != null) {
+            canvas.setColor(this.color);
+            canvas.drawOval((int)x, (int)y, diameter, diameter);
+        }
 
-        // Set the color for the fill
         if (this.fillColor != null) {
             canvas.setColor(this.fillColor);
-            canvas.fillOval(x, y, diameter, diameter);
+            canvas.fillOval((int)x,(int)y, diameter, diameter);
         }
     }
 
