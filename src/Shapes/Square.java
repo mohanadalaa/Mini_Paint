@@ -6,6 +6,8 @@ import java.util.Map;
 
 public class Square implements Shape {
 
+    private static  int NUMBER_OF_SQUARES=0;
+    private int indx;
     private Point position;
     private Color color;
     private Color fillColor;
@@ -16,6 +18,8 @@ public class Square implements Shape {
         this.position = position;
         properties = new HashMap<>();
         properties.put("length", length);
+        indx=NUMBER_OF_SQUARES;
+        NUMBER_OF_SQUARES++;
     }
 
     @Override
@@ -72,5 +76,8 @@ public class Square implements Shape {
             canvas.setColor(this.fillColor);
             canvas.fillRect(x,y,length,length);
         }
+    }
+    public String toString() {
+        return "Square"+indx;
     }
 }

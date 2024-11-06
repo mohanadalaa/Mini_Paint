@@ -2,7 +2,6 @@ package Engine;
 
 import Shapes.Shape;
 
-import java.awt.*;
 import java.util.ArrayList;
 
 public class DrawingEngine implements Engine{
@@ -27,9 +26,9 @@ public class DrawingEngine implements Engine{
         return this.list;
     }
 
-
     @Override
     public void refresh(java.awt.Graphics canvas ) {
+
         for(Shape shape : this.list){
             shape.draw(canvas);
         }

@@ -6,6 +6,8 @@ import java.util.Map;
 
 public class Rectangle implements Shape {
 
+    private static  int NUMBER_OF_RECTANGLES=0;
+    private int indx;
     private Point position;
     private Color color;
     private Color fillColor;
@@ -17,6 +19,8 @@ public class Rectangle implements Shape {
         properties = new HashMap<>();
         properties.put("height", height);
         properties.put("width", width);
+        indx=NUMBER_OF_RECTANGLES;
+        NUMBER_OF_RECTANGLES++;
     }
 
     @Override
@@ -75,5 +79,8 @@ public class Rectangle implements Shape {
             canvas.setColor(this.fillColor);
             canvas.fillRect(x, y, (int) width, (int) height);
         }
+    }
+    public String toString() {
+        return "Rectangle"+indx;
     }
 }

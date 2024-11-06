@@ -6,6 +6,8 @@ import java.util.Map;
 
 public class Circle implements Shape {
 
+    private static  int NUMBER_OF_CIRCLES=0;
+    private int indx;
     private Point position;
     private Color color;
     private Color fillColor;
@@ -17,6 +19,8 @@ public class Circle implements Shape {
         this.color = Color.BLACK;
         this.properties = new HashMap<>();
         this.properties.put("radius", radius);
+        this.indx=NUMBER_OF_CIRCLES;
+        NUMBER_OF_CIRCLES++;
     }
 
     @Override
@@ -77,6 +81,8 @@ public class Circle implements Shape {
             canvas.fillOval((int)x,(int)y, diameter, diameter);
         }
     }
-
+    public String toString() {
+        return "Circle"+indx;
+    }
 
 }
