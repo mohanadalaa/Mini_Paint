@@ -1,15 +1,19 @@
 package GUI;
 
+import Patterns.ColourizeCommand;
+
 import java.awt.*;
 import javax.swing.*;
 
-public class ColorMenu extends JDialog {
-
+public class ColorWindow extends JDialog {
     private Color chosenColor;
+    private Gui gui;
     javax.swing.JColorChooser jColorChooser1;
-    public ColorMenu(JFrame parent) {
-        super(parent, true);
+    public ColorWindow(Gui gui) {
+        super(gui, true);
+        this.gui = gui;
         initComponents();
+        setVisible(true);
     }
 
     private void initComponents() {
@@ -57,6 +61,15 @@ public class ColorMenu extends JDialog {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {
         chosenColor = jColorChooser1.getColor();
+        ColourizeCommand colourizeCommand =
+                new ColourizeCommand(
+                        this.gui.engine,
+                        this.gui.shapeComboBox,
+                        this.gui.currentShape,
+                        chosenColor);
+        colourizeCommand.execute();
+        this.gui.undoStack.push(colourizeCommand);
+        this.gui.engine.refresh(this.gui.panel4.getGraphics());
         setVisible(false);
     }
 

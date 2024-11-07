@@ -1,7 +1,6 @@
 package Patterns;
 
 import Engine.DrawingEngine;
-import GUI.Panel4;
 import Shapes.Shape;
 
 import javax.swing.*;

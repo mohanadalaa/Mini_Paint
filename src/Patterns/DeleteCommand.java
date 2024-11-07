@@ -2,7 +2,6 @@ package Patterns;
 
 import Engine.DrawingEngine;
 import Shapes.Shape;
-
 import javax.swing.*;
 
 public class DeleteCommand implements Command {

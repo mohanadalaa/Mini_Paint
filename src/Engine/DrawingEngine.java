@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 public class DrawingEngine implements Engine{
 
-    private ArrayList<Shape> list;
+    private final ArrayList<Shape> list;
     public DrawingEngine(){
         this.list=new ArrayList<>();
     }
