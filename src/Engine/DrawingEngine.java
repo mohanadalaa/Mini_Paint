@@ -28,7 +28,6 @@ public class DrawingEngine implements Engine{
 
     @Override
     public void refresh(java.awt.Graphics canvas ) {
-
         for(Shape shape : this.list){
             shape.draw(canvas);
         }

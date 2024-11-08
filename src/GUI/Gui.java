@@ -86,7 +86,7 @@ public class Gui extends JFrame implements ActionListener  {
         panel.add(panel2);
 
         JPanel panel3 = new JPanel();
-        panel3.setLayout(new FlowLayout(FlowLayout.RIGHT,150,25));
+        panel3.setLayout(new FlowLayout(FlowLayout.RIGHT,80,25));
         circleButton = new JButton("Circle");
         circleButton.setFocusable(false);
         circleButton.addActionListener(this);
@@ -159,7 +159,7 @@ public class Gui extends JFrame implements ActionListener  {
                JOptionPane.showMessageDialog(null, "Please select a valid shape", "Warning", JOptionPane.WARNING_MESSAGE);
                return;
            }
-          new ColorWindow(this);
+           new ColorWindow(this);
        }
         if (e.getSource() == deleteButton) {
             if (currentShape == null || currentShape.toString().equals("Select a Shape")) {

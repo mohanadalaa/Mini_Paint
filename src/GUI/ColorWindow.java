@@ -1,83 +1,147 @@
 package GUI;
 
+
 import Patterns.ColourizeCommand;
 
-import java.awt.*;
 import javax.swing.*;
+import java.awt.*;
 
-public class ColorWindow extends JDialog {
-    private Color chosenColor;
+
+public class ColorWindow extends javax.swing.JFrame {
+
     private Gui gui;
-    javax.swing.JColorChooser jColorChooser1;
     public ColorWindow(Gui gui) {
-        super(gui, true);
         this.gui = gui;
         initComponents();
+        this.setTitle("Color Window");
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        setLocationRelativeTo(null);
         setVisible(true);
     }
 
     private void initComponents() {
 
         jColorChooser1 = new javax.swing.JColorChooser();
-        javax.swing.JButton jButton1 = new javax.swing.JButton();
-        javax.swing.JButton  jButton2 = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        jRadioButton1 = new javax.swing.JRadioButton();
+        jRadioButton2 = new javax.swing.JRadioButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jButton1.setText("OK");
+        jButton1.setText("Save");
+        jButton2.setText("Cancel");
+
         jButton1.addActionListener(this::jButton1ActionPerformed);
 
-        jButton2.setText("Cancel");
+
         jButton2.addActionListener(this::jButton2ActionPerformed);
+
+        jRadioButton1.addActionListener(this::jRadioButton1ActionPerformed);
+        jRadioButton2.addActionListener(this::jRadioButton2ActionPerformed);
+
+        jRadioButton1.setText("Inner Color");
+        jRadioButton2.setText("Outer Color");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
                 layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jColorChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 644, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap())
                         .addGroup(layout.createSequentialGroup()
-                                .addGap(201, 201, 201)
-                                .addComponent(jButton1)
-                                .addGap(72, 72, 72)
-                                .addComponent(jButton2)
+                                .addContainerGap()
+                                .addComponent(jColorChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(layout.createSequentialGroup()
+                                .addGap(202, 202, 202)
+                                .addComponent(jButton1)
+                                .addGap(63, 63, 63)
+                                .addComponent(jButton2)
+                                .addGap(47, 47, 47)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jRadioButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jRadioButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
                 layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(jColorChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(55, 55, 55)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addContainerGap(31, Short.MAX_VALUE))
+                                .addComponent(jColorChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 347, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(layout.createSequentialGroup()
+                                                .addGap(15, 15, 15)
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addGroup(layout.createSequentialGroup()
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(jRadioButton1)
+                                                .addGap(12, 12, 12)
+                                                .addComponent(jRadioButton2)))
+                                .addContainerGap(16, Short.MAX_VALUE))
         );
+
         pack();
     }
 
+    private boolean innerValid = false;
+    private boolean outerValid = false;
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {
-        chosenColor = jColorChooser1.getColor();
-        ColourizeCommand colourizeCommand =
-                new ColourizeCommand(
-                        this.gui.engine,
-                        this.gui.shapeComboBox,
-                        this.gui.currentShape,
-                        chosenColor);
-        colourizeCommand.execute();
-        this.gui.undoStack.push(colourizeCommand);
-        this.gui.engine.refresh(this.gui.panel4.getGraphics());
-        setVisible(false);
-    }
 
+
+        if(innerValid==false && outerValid==false){
+            JOptionPane.showMessageDialog(null,
+                    "Please enter Area to Color",
+                    "Error",JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        ColourizeCommand colourizeCommand;
+        Color chosenColor;
+
+        if(innerValid==true && outerValid==false){
+            chosenColor = jColorChooser1.getColor();
+            colourizeCommand = new ColourizeCommand(gui.engine,
+                    gui.shapeComboBox,
+                    gui.currentShape,
+                    chosenColor,
+                    gui.currentShape.getColor());
+            colourizeCommand.execute();
+            this.gui.undoStack.push(colourizeCommand);
+        }
+        if(innerValid==false && outerValid==true){
+            chosenColor = jColorChooser1.getColor();
+            colourizeCommand = new ColourizeCommand(gui.engine,
+                    gui.shapeComboBox,
+                    gui.currentShape,
+                    gui.currentShape.getFillColor(),
+                    chosenColor);
+            colourizeCommand.execute();
+            this.gui.undoStack.push(colourizeCommand);
+        }
+        if(innerValid==true && outerValid==true){
+            chosenColor = jColorChooser1.getColor();
+            colourizeCommand = new ColourizeCommand(gui.engine,
+                    gui.shapeComboBox,
+                    gui.currentShape,
+                    chosenColor,
+                    chosenColor);
+            colourizeCommand.execute();
+            this.gui.undoStack.push(colourizeCommand);
+        }
+        this.gui.engine.refresh(this.gui.panel4.getGraphics());
+        dispose();
+    }
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {
-        chosenColor = null;
-        setVisible(false);
+        dispose();
     }
-    public Color getChosenColor() {
-        return chosenColor;
+    private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {
+       innerValid = !innerValid;
     }
+    private void jRadioButton2ActionPerformed(java.awt.event.ActionEvent evt) {
+        outerValid = !outerValid;
+    }
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JColorChooser jColorChooser1;
+    private javax.swing.JRadioButton jRadioButton1;
+    private javax.swing.JRadioButton jRadioButton2;
 }

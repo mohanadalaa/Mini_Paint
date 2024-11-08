@@ -10,27 +10,35 @@ public class ColourizeCommand implements Command {
     private DrawingEngine engine;
     private JComboBox<Shape> shapeComboBox;
     private Shape currentShape;
-    private Color currentColor;
-    private Color nextColor;
-    public ColourizeCommand(DrawingEngine engine, JComboBox<Shape> shapeComboBox,Shape currentShape,Color nextColor) {
+    private Color currentInnerColor;
+    private Color currentOuterColor;
+    private Color nextInnerColor;
+    private Color nextOuterColor;
+    public ColourizeCommand(DrawingEngine engine,
+                            JComboBox<Shape> shapeComboBox,
+                            Shape currentShape,
+                            Color nextInnerColor,
+                            Color nextOuterColor) {
         this.engine = engine;
         this.shapeComboBox = shapeComboBox;
         this.currentShape = currentShape;
-        this.currentColor = this.currentShape.getFillColor();
-        this.nextColor = nextColor;
+        this.currentInnerColor = this.currentShape.getFillColor();
+        this.currentOuterColor = this.currentShape.getColor();
+        this.nextInnerColor = nextInnerColor;
+        this.nextOuterColor = nextOuterColor;
     }
 
     @Override
     public void execute() {
-       // this.currentShape.setColor(this.nextColor);
-        this.currentShape.setFillColor(this.nextColor);
+        this.currentShape.setColor(this.nextOuterColor);
+        this.currentShape.setFillColor(this.nextInnerColor);
         shapeComboBox.setSelectedIndex(shapeComboBox.getItemCount()-1);
     }
 
     @Override
     public void undo() {
-       // this.currentShape.setColor(this.currentColor);
-        this.currentShape.setFillColor(this.currentColor);
+        this.currentShape.setColor(this.currentOuterColor);
+        this.currentShape.setFillColor(this.currentInnerColor);
         shapeComboBox.setSelectedIndex(shapeComboBox.getItemCount()-1);
     }
 }
