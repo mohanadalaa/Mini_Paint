@@ -76,6 +76,7 @@ public class Gui extends JFrame implements ActionListener  {
         UndoButton.addActionListener(this);
         UndoButton.setFocusable(false);
         UndoButton.setPreferredSize(new Dimension(100, 30));
+        UndoButton.setEnabled(false);
 
         panel2.add(colorizeButton);
         panel2.add(deleteButton);
@@ -186,9 +187,10 @@ public class Gui extends JFrame implements ActionListener  {
                 Command lastCommand = undoStack.pop();
                 lastCommand.undo();
                 this.panel4.repaint();
-            }
-            else{
-                JOptionPane.showMessageDialog(null,"Nothing to Undo", "Warning", JOptionPane.WARNING_MESSAGE);
+                if(undoStack.isEmpty())
+                {
+                    UndoButton.setEnabled(false);
+                }
             }
         }
         if (e.getSource()==shapeComboBox)
