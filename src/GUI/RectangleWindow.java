@@ -170,6 +170,15 @@ public class RectangleWindow extends javax.swing.JFrame {
             jTextField4.setText("");
             return;
         }
+        if (x<0 || y<0  || len<0||w<0){
+            JOptionPane.showMessageDialog(null,
+                    "Please enter valid Coordinates , Length and Width",
+                    "Error",JOptionPane.ERROR_MESSAGE);
+            jTextField2.setText("");
+            jTextField1.setText("");
+            jTextField3.setText("");
+            return;
+        }
 
         Rectangle rectangle = new Rectangle(len,w,new Point(x,y));
         CreateCommand command = new CreateCommand(this.gui.engine,this.gui.shapeComboBox,rectangle);

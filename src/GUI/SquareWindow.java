@@ -145,6 +145,15 @@ public class SquareWindow extends javax.swing.JFrame {
             jTextField3.setText("");
             return;
         }
+        if (x<0 || y<0  || len<0){
+            JOptionPane.showMessageDialog(null,
+                    "Please enter valid Coordinates and Length",
+                    "Error",JOptionPane.ERROR_MESSAGE);
+            jTextField2.setText("");
+            jTextField1.setText("");
+            jTextField3.setText("");
+            return;
+        }
 
         Square square = new Square(len,new Point(x,y));
         CreateCommand command = new CreateCommand(this.gui.engine,this.gui.shapeComboBox,square);

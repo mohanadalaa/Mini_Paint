@@ -161,6 +161,12 @@ public class LineSegmentWindow extends javax.swing.JFrame {
             endY.setText("");
             return;
         }
+        if (xs<0 || ys<0  || xe<0 || ye<0){
+            JOptionPane.showMessageDialog(null,
+                    "Please enter valid Coordinates",
+                    "Error",JOptionPane.ERROR_MESSAGE);
+            return;
+        }
 
         LineSegment segment = new LineSegment(new Point(xs,ys),new Point(xe,ye));
         CreateCommand command = new CreateCommand(this.gui.engine,this.gui.shapeComboBox,segment);
