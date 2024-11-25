@@ -3,8 +3,13 @@ package GUI;
 import Engine.DrawingEngine;
 import Patterns.Command;
 import Patterns.DeleteCommand;
+import ShapeWindows.CircleWindow;
+import ShapeWindows.LineSegmentWindow;
+import ShapeWindows.RectangleWindow;
+import ShapeWindows.SquareWindow;
 import Shapes.*;
 import Shapes.Shape;
+import UtilWindows.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -15,22 +20,26 @@ import java.util.Stack;
 
 public class Gui extends JFrame implements ActionListener  {
 
-    protected DrawingEngine engine ;
-    protected JComboBox<Shape> shapeComboBox;
-    protected JButton colorizeButton;
-    protected JButton deleteButton;
-    protected JButton resetButton;
-    protected JButton UndoButton;
-    protected JButton circleButton;
-    protected JButton squareButton;
-    protected JButton rectangleButton;
-    protected JButton lineSegmentButton;
-    protected Shape currentShape;
-    protected  Panel4 panel4;
-    protected Stack<Command> undoStack = new Stack<>();
+    //public variables to be passed to the windows
+    public DrawingEngine engine ;
+    public JComboBox<Shape> shapeComboBox;
+    public Shape currentShape;
+    public  Panel4 panel4;
+    public JButton UndoButton;
+    public Stack<Command> undoStack = new Stack<>();
+
+    //private variables
+    private final JButton moveButton;
+    private final JButton resizeButton;
+    private final JButton colorizeButton;
+    private final JButton deleteButton;
+    private final JButton resetButton;
+    private final JButton circleButton;
+    private final JButton squareButton;
+    private final JButton rectangleButton;
+    private final JButton lineSegmentButton;
 
     public Gui() {
-
         engine = new DrawingEngine();
         JFrame frame = new JFrame("Paint Application");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -55,7 +64,7 @@ public class Gui extends JFrame implements ActionListener  {
 
         JPanel panel2 = new JPanel();
         panel2.setPreferredSize(new Dimension(150, 800));
-        panel2.setLayout(new FlowLayout(FlowLayout.CENTER,20,70));
+        panel2.setLayout(new FlowLayout(FlowLayout.CENTER,20,30));
         colorizeButton = new JButton("Colorize");
         colorizeButton.addActionListener(this);
         colorizeButton.setFocusable(false);
@@ -78,10 +87,24 @@ public class Gui extends JFrame implements ActionListener  {
         UndoButton.setPreferredSize(new Dimension(100, 30));
         UndoButton.setEnabled(false);
 
+        resizeButton = new JButton("Resize");
+        resizeButton.addActionListener(this);
+        resizeButton.setFocusable(false);
+        resizeButton.setPreferredSize(new Dimension(100, 30));
+        resizeButton .setEnabled(false);
+
+
+        moveButton = new JButton("Move");
+        moveButton.addActionListener(this);
+        moveButton.setFocusable(false);
+        moveButton.setPreferredSize(new Dimension(100, 30));
+
         panel2.add(colorizeButton);
         panel2.add(deleteButton);
         panel2.add(resetButton);
         panel2.add(UndoButton);
+        panel2.add(resizeButton);
+        panel2.add(moveButton);
 
         panel.add(panel1);
         panel.add(panel2);
@@ -132,12 +155,14 @@ public class Gui extends JFrame implements ActionListener  {
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
 
+
         System.out.println(panel4.getWidth());
         System.out.println(panel4.getHeight());
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
+
        if(e.getSource()==squareButton)
        {
              new SquareWindow(this);
@@ -167,19 +192,38 @@ public class Gui extends JFrame implements ActionListener  {
                 JOptionPane.showMessageDialog(null, "Please select a valid shape", "Warning", JOptionPane.WARNING_MESSAGE);
                 return;
             }
-            DeleteCommand deleteCommand = new DeleteCommand(engine,shapeComboBox,currentShape);
+            DeleteCommand deleteCommand = new DeleteCommand(engine,shapeComboBox, currentShape);
             deleteCommand.execute();
             undoStack.push(deleteCommand);
             panel4.repaint();
         }
         if (e.getSource()==resetButton)
        {
-           this.engine.getShapes().clear();
-           this.shapeComboBox.removeAllItems();
-           this.shapeComboBox.addItem(new SelectedShape());
-           shapeComboBox.setSelectedIndex(shapeComboBox.getItemCount()-1);
-           panel4.repaint();
+           ResetCommand resetCommand = new ResetCommand(this);
+           resetCommand.execute();
+           undoStack.push(resetCommand);
        }
+        if (e.getSource()==resizeButton)
+        {
+            if (currentShape == null || currentShape.toString().equals("Select a Shape")) {
+                JOptionPane.showMessageDialog(null, "Please select a valid shape", "Warning", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+            new ResizeWindow(this);
+        }
+        if(e.getSource()==moveButton)
+        {
+            if (currentShape == null || currentShape.toString().equals("Select a Shape")) {
+                JOptionPane.showMessageDialog(null, "Please select a valid shape", "Warning", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+            if (currentShape.getEndPoint()!=null) {
+                new MoveSegmentWindow(this);
+            }
+            else {
+                new MoveWindow(this);
+            }
+        }
         if (e.getSource()==UndoButton)
         {
             if(!undoStack.isEmpty())
@@ -195,7 +239,7 @@ public class Gui extends JFrame implements ActionListener  {
         }
         if (e.getSource()==shapeComboBox)
         {
-            this.currentShape= (Shape) shapeComboBox.getSelectedItem();
+            this.currentShape = (Shape) shapeComboBox.getSelectedItem();
         }
     }
 

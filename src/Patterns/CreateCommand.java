@@ -11,7 +11,7 @@ public class CreateCommand implements Command {
    private DrawingEngine engine;
    private JComboBox<Shape> shapeComboBox;
    private Shape currentShape;
-   public CreateCommand(DrawingEngine engine, JComboBox<Shape> shapeComboBox,Shape currentShape) {
+   public CreateCommand(DrawingEngine engine, JComboBox<Shape> shapeComboBox, Shape currentShape) {
        this.engine = engine;
        this.shapeComboBox = shapeComboBox;
        this.currentShape = currentShape;

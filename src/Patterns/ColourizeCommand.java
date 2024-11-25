@@ -1,25 +1,21 @@
 package Patterns;
-
-import Engine.DrawingEngine;
 import Shapes.Shape;
-
 import javax.swing.*;
 import java.awt.*;
 
 public class ColourizeCommand implements Command {
-    private DrawingEngine engine;
     private JComboBox<Shape> shapeComboBox;
     private Shape currentShape;
     private Color currentInnerColor;
     private Color currentOuterColor;
     private Color nextInnerColor;
     private Color nextOuterColor;
-    public ColourizeCommand(DrawingEngine engine,
+    public ColourizeCommand(
                             JComboBox<Shape> shapeComboBox,
                             Shape currentShape,
                             Color nextInnerColor,
                             Color nextOuterColor) {
-        this.engine = engine;
+
         this.shapeComboBox = shapeComboBox;
         this.currentShape = currentShape;
         this.currentInnerColor = this.currentShape.getFillColor();

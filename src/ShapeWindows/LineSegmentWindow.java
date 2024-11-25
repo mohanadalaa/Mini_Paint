@@ -1,6 +1,7 @@
 
-package GUI;
+package ShapeWindows;
 
+import GUI.Gui;
 import Patterns.CreateCommand;
 import Shapes.LineSegment;
 
@@ -153,7 +154,7 @@ public class LineSegmentWindow extends javax.swing.JFrame {
         }
         if(!(valid1 && valid2 && valid3 && valid4)){
             JOptionPane.showMessageDialog(null,
-                    "Please enter valid Coordinates , Length and Width",
+                    "Please enter valid Coordinates",
                     "Error",JOptionPane.ERROR_MESSAGE);
             startX.setText("");
             startY.setText("");
@@ -176,7 +177,6 @@ public class LineSegmentWindow extends javax.swing.JFrame {
         this.gui.engine.refresh(this.gui.panel4.getGraphics());
         this.dispose();
     }
-
 
 
     private javax.swing.JTextField endX;

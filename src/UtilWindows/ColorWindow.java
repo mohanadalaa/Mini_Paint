@@ -1,6 +1,7 @@
-package GUI;
+package UtilWindows;
 
 
+import GUI.Gui;
 import Patterns.ColourizeCommand;
 
 import javax.swing.*;
@@ -99,7 +100,7 @@ public class ColorWindow extends javax.swing.JFrame {
 
         if(innerValid==true && outerValid==false){
             chosenColor = jColorChooser1.getColor();
-            colourizeCommand = new ColourizeCommand(gui.engine,
+            colourizeCommand = new ColourizeCommand(
                     gui.shapeComboBox,
                     gui.currentShape,
                     chosenColor,
@@ -109,7 +110,7 @@ public class ColorWindow extends javax.swing.JFrame {
         }
         if(innerValid==false && outerValid==true){
             chosenColor = jColorChooser1.getColor();
-            colourizeCommand = new ColourizeCommand(gui.engine,
+            colourizeCommand = new ColourizeCommand(
                     gui.shapeComboBox,
                     gui.currentShape,
                     gui.currentShape.getFillColor(),
@@ -119,7 +120,7 @@ public class ColorWindow extends javax.swing.JFrame {
         }
         if(innerValid==true && outerValid==true){
             chosenColor = jColorChooser1.getColor();
-            colourizeCommand = new ColourizeCommand(gui.engine,
+            colourizeCommand = new ColourizeCommand(
                     gui.shapeComboBox,
                     gui.currentShape,
                     chosenColor,

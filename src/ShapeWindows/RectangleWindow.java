@@ -1,5 +1,6 @@
-package GUI;
+package ShapeWindows;
 
+import GUI.Gui;
 import Patterns.CreateCommand;
 import Shapes.Rectangle;
 
