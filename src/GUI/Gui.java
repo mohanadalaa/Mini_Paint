@@ -3,6 +3,11 @@ package GUI;
 import Engine.DrawingEngine;
 import Patterns.Command;
 import Patterns.DeleteCommand;
+import Patterns.ResetCommand;
+import ResizeShapes.CircleResizeWindow;
+import ResizeShapes.LineSegmentResizeWindow;
+import ResizeShapes.RectangleResizeWindow;
+import ResizeShapes.SquareResizeWindow;
 import ShapeWindows.CircleWindow;
 import ShapeWindows.LineSegmentWindow;
 import ShapeWindows.RectangleWindow;
@@ -91,7 +96,7 @@ public class Gui extends JFrame implements ActionListener  {
         resizeButton.addActionListener(this);
         resizeButton.setFocusable(false);
         resizeButton.setPreferredSize(new Dimension(100, 30));
-        resizeButton .setEnabled(false);
+
 
 
         moveButton = new JButton("Move");
@@ -192,10 +197,9 @@ public class Gui extends JFrame implements ActionListener  {
                 JOptionPane.showMessageDialog(null, "Please select a valid shape", "Warning", JOptionPane.WARNING_MESSAGE);
                 return;
             }
-            DeleteCommand deleteCommand = new DeleteCommand(engine,shapeComboBox, currentShape);
+            DeleteCommand deleteCommand = new DeleteCommand(engine,shapeComboBox, currentShape,panel4);
             deleteCommand.execute();
             undoStack.push(deleteCommand);
-            panel4.repaint();
         }
         if (e.getSource()==resetButton)
        {
@@ -209,7 +213,19 @@ public class Gui extends JFrame implements ActionListener  {
                 JOptionPane.showMessageDialog(null, "Please select a valid shape", "Warning", JOptionPane.WARNING_MESSAGE);
                 return;
             }
-            new ResizeWindow(this);
+
+           if (currentShape.isRectangle()) {
+               new RectangleResizeWindow(this);
+           }
+           if (currentShape.isCircle()) {
+               new CircleResizeWindow(this);
+           }
+           if (currentShape.isLineSegment()) {
+               new LineSegmentResizeWindow(this);
+           }
+           if (currentShape.isSquare()) {
+               new SquareResizeWindow(this);
+           }
         }
         if(e.getSource()==moveButton)
         {
@@ -217,7 +233,7 @@ public class Gui extends JFrame implements ActionListener  {
                 JOptionPane.showMessageDialog(null, "Please select a valid shape", "Warning", JOptionPane.WARNING_MESSAGE);
                 return;
             }
-            if (currentShape.getEndPoint()!=null) {
+            if (currentShape.isLineSegment()) {
                 new MoveSegmentWindow(this);
             }
             else {

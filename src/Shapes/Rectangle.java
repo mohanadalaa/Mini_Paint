@@ -41,6 +41,27 @@ public class Rectangle extends Shape {
             canvas.fillRect(x, y, (int) width, (int) height);
         }
     }
+
+    @Override
+    public boolean isLineSegment() {
+        return false;
+    }
+
+    @Override
+    public boolean isSquare() {
+        return false;
+    }
+
+    @Override
+    public boolean isRectangle() {
+        return true;
+    }
+
+    @Override
+    public boolean isCircle() {
+        return false;
+    }
+
     public String toString() {
         return "Rectangle"+indx;
     }

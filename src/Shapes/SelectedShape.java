@@ -21,6 +21,26 @@ public class SelectedShape extends Shape {
 
     }
 
+    @Override
+    public boolean isLineSegment() {
+        return false;
+    }
+
+    @Override
+    public boolean isSquare() {
+        return false;
+    }
+
+    @Override
+    public boolean isRectangle() {
+        return false;
+    }
+
+    @Override
+    public boolean isCircle() {
+        return false;
+    }
+
     public String toString()
     {
         return "Select a Shape";

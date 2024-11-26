@@ -44,6 +44,27 @@ public class Circle extends Shape {
             canvas.fillOval((int)x,(int)y, diameter, diameter);
         }
     }
+
+    @Override
+    public boolean isLineSegment() {
+        return false;
+    }
+
+    @Override
+    public boolean isSquare() {
+        return false;
+    }
+
+    @Override
+    public boolean isRectangle() {
+        return false;
+    }
+
+    @Override
+    public boolean isCircle() {
+        return true;
+    }
+
     public String toString() {
         return "Circle"+indx;
     }

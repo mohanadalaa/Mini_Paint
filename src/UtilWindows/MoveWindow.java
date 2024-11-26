@@ -10,7 +10,7 @@ public class MoveWindow extends javax.swing.JFrame {
     public MoveWindow(Gui gui) {
         this.gui = gui;
         initComponents();
-        this.setTitle("Square Creation Window");
+        this.setTitle("Move "+this.gui.currentShape.toString()+" Window");
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null);
         setVisible(true);
@@ -125,7 +125,7 @@ public class MoveWindow extends javax.swing.JFrame {
             jTextField1.setText("");
             return;
         }
-        MoveCommand command = new MoveCommand(this.gui.shapeComboBox,this.gui.currentShape,new Point(x,y),null);
+        MoveCommand command = new MoveCommand(this.gui.shapeComboBox, this.gui.currentShape,new Point(x,y),null);
         command.execute();
         this.gui.undoStack.push(command);
         this.gui.UndoButton.setEnabled(true);

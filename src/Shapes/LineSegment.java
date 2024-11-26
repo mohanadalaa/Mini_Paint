@@ -43,6 +43,26 @@ public class LineSegment extends Shape {
     }
 
     @Override
+    public boolean isLineSegment() {
+        return true;
+    }
+
+    @Override
+    public boolean isSquare() {
+        return false;
+    }
+
+    @Override
+    public boolean isRectangle() {
+        return false;
+    }
+
+    @Override
+    public boolean isCircle() {
+        return false;
+    }
+
+    @Override
     public String toString() {
         return "LineSegment" + indx;
     }

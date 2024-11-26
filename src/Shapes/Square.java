@@ -39,6 +39,27 @@ public class Square extends Shape {
             canvas.fillRect(x,y,length,length);
         }
     }
+
+    @Override
+    public boolean isLineSegment() {
+        return false;
+    }
+
+    @Override
+    public boolean isSquare() {
+        return true;
+    }
+
+    @Override
+    public boolean isRectangle() {
+        return false;
+    }
+
+    @Override
+    public boolean isCircle() {
+        return false;
+    }
+
     public String toString() {
         return "Square"+indx;
     }

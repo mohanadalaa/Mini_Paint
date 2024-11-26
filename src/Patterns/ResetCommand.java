@@ -1,8 +1,7 @@
-package UtilWindows;
+package Patterns;
 
 
 import GUI.Gui;
-import Patterns.Command;
 import Shapes.SelectedShape;
 import Shapes.Shape;
 

@@ -68,5 +68,10 @@ public  abstract class Shape implements ShapeInter {
     @Override
     public abstract void  draw(Graphics canvas) ;
 
+    public abstract boolean isLineSegment();
+    public abstract boolean isSquare();
+    public abstract boolean isRectangle();
+    public abstract boolean isCircle();
+
 
 }

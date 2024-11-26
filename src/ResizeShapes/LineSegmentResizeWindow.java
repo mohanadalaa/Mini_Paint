@@ -1,20 +1,20 @@
-package UtilWindows;
+package ResizeShapes;
 
 import GUI.Gui;
-import Patterns.CreateCommand;
 import Patterns.MoveCommand;
-import Shapes.LineSegment;
+import Patterns.ResizeCommand;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 
-public class MoveSegmentWindow extends javax.swing.JFrame {
+public class LineSegmentResizeWindow extends javax.swing.JFrame {
     private Gui gui;
-    public MoveSegmentWindow(Gui gui) {
-        this.gui=gui;
+
+    public LineSegmentResizeWindow(Gui gui) {
+        this.gui = gui;
         initComponents();
-        this.setTitle("LineSegment Move Window");
+        this.setTitle("Line Segment Resize Window");
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null);
         setVisible(true);
@@ -24,29 +24,22 @@ public class MoveSegmentWindow extends javax.swing.JFrame {
     private void initComponents() {
 
         jButton1 = new javax.swing.JButton();
-        startY = new javax.swing.JTextField();
-        startX = new javax.swing.JTextField();
-        JLabel jLabel1 = new JLabel();
+        JLabel jLabel4 = new JLabel();
         JLabel jLabel2 = new JLabel();
         JLabel jLabel3 = new JLabel();
-        JLabel jLabel4 = new JLabel();
         endY = new javax.swing.JTextField();
         endX = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jButton1.setText("Create");
+        jButton1.setText("Resize");
         jButton1.addActionListener(this::jButton1ActionPerformed);
 
-
-        jLabel1.setText("Start Point");
+        jLabel4.setText("End Point");
 
         jLabel2.setText("X");
 
         jLabel3.setText("Y");
-
-        jLabel4.setText("End Point");
-
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -59,17 +52,11 @@ public class MoveSegmentWindow extends javax.swing.JFrame {
                                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                                         .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                                        .addComponent(jLabel4)
-                                                                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                                .addComponent(jLabel4)
                                                                 .addGap(32, 32, 32)
-                                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                                        .addComponent(endX, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                                        .addComponent(startX, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                                                .addComponent(endX, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                        .addComponent(startY, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                        .addComponent(endY, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                .addComponent(endY, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                 .addGap(75, 75, 75))
                                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                                 .addComponent(jLabel2)
@@ -86,11 +73,6 @@ public class MoveSegmentWindow extends javax.swing.JFrame {
                                         .addComponent(jLabel3))
                                 .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(startY, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(startX, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jLabel1))
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                         .addComponent(endX, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addComponent(endY, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -103,76 +85,54 @@ public class MoveSegmentWindow extends javax.swing.JFrame {
     }
 
     private void jButton1ActionPerformed(ActionEvent evt) {
-        if(startX.getText().isEmpty() ||
-                startY.getText().isEmpty() ||
-                endX.getText().isEmpty() ||
-                endY.getText().isEmpty()) {
+        if (endX.getText().isEmpty() || endY.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null,
-                    "Please enter Coordinates",
-                    "Error",JOptionPane.ERROR_MESSAGE);
+                    "Please enter End Point Coordinates",
+                    "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
-        String xStart = startX.getText();
-        String yStart = startY.getText();
+
         String xEnd = endX.getText();
         String yEnd = endY.getText();
 
-        boolean valid1;
-        boolean valid2;
-        boolean valid3;
-        boolean valid4;
+        boolean validX;
+        boolean validY;
 
-        int xs=0;
-        int ys=0;
-        int xe=0;
-        int ye=0;
+        int xe = 0;
+        int ye = 0;
 
-        try {
-            xs=Integer.parseInt(xStart);
-            valid1 = true;
-        } catch (NumberFormatException e) {
-            valid1 = false;
-        }
-        try {
-            ys= Integer.parseInt(yStart);
-            valid2 = true;
-        } catch (NumberFormatException e) {
-            valid2 = false;
-        }
         try {
             xe = Integer.parseInt(xEnd);
-            valid3 = true;
+            validX = true;
         } catch (NumberFormatException e) {
-            valid3 = false;
+            validX = false;
         }
-        try{
+        try {
             ye = Integer.parseInt(yEnd);
-            valid4 = true;
+            validY = true;
+        } catch (NumberFormatException e) {
+            validY = false;
         }
-        catch(NumberFormatException e){
-            valid4 = false;
-        }
-        if(!(valid1 && valid2 && valid3 && valid4)){
+
+        if (!(validX && validY)) {
             JOptionPane.showMessageDialog(null,
-                    "Please enter valid Coordinates , Length and Width",
-                    "Error",JOptionPane.ERROR_MESSAGE);
-            startX.setText("");
-            startY.setText("");
+                    "Please enter valid End Point Coordinates",
+                    "Error", JOptionPane.ERROR_MESSAGE);
             endX.setText("");
             endY.setText("");
             return;
         }
-        if (xs<0 || ys<0  || xe<0 || ye<0){
+
+        if (xe < 0 || ye < 0) {
             JOptionPane.showMessageDialog(null,
-                    "Please enter valid Coordinates",
-                    "Error",JOptionPane.ERROR_MESSAGE);
+                    "Coordinates must be non-negative",
+                    "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
-        Point startPoint = new Point(xs,ys);
-        Point endPoint = new Point(xe,ye);
+        Point endPoint = new Point(xe, ye);
 
-        MoveCommand command = new MoveCommand(this.gui.shapeComboBox,this.gui.currentShape,startPoint,endPoint);
+        ResizeCommand command = new ResizeCommand(this.gui.shapeComboBox, this.gui.currentShape,endPoint);
         command.execute();
         this.gui.undoStack.push(command);
         this.gui.UndoButton.setEnabled(true);
@@ -180,10 +140,7 @@ public class MoveSegmentWindow extends javax.swing.JFrame {
         this.dispose();
     }
 
-
     private javax.swing.JTextField endX;
     private javax.swing.JTextField endY;
     private javax.swing.JButton jButton1;
-    private javax.swing.JTextField startX;
-    private javax.swing.JTextField startY;
 }
