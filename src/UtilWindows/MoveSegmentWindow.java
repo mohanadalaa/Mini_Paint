@@ -1,16 +1,12 @@
 package UtilWindows;
-
 import GUI.Gui;
-import Patterns.CreateCommand;
 import Patterns.MoveCommand;
-import Shapes.LineSegment;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 
 public class MoveSegmentWindow extends javax.swing.JFrame {
-    private Gui gui;
+    private final Gui gui;
     public MoveSegmentWindow(Gui gui) {
         this.gui=gui;
         initComponents();

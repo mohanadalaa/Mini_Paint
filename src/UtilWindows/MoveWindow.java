@@ -5,7 +5,7 @@ import javax.swing.*;
 import java.awt.*;
 
 public class MoveWindow extends javax.swing.JFrame {
-    private Gui gui;
+    private final Gui gui;
 
     public MoveWindow(Gui gui) {
         this.gui = gui;

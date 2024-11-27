@@ -27,22 +27,32 @@ public class Gui extends JFrame implements ActionListener  {
 
     //public variables to be passed to the windows
     public DrawingEngine engine ;
-    public JComboBox<Shape> shapeComboBox;
     public Shape currentShape;
     public  Panel4 panel4;
-    public JButton UndoButton;
     public Stack<Command> undoStack = new Stack<>();
 
-    //private variables
+    //panel 1 variables
+    public JButton UndoButton;
+    public JComboBox<Shape> shapeComboBox;
+    private final JButton resetButton;
+    private final JButton saveButton;
+    private final JButton loadButton;
+
+
+    //panel 2 variables
     private final JButton moveButton;
     private final JButton resizeButton;
     private final JButton colorizeButton;
     private final JButton deleteButton;
-    private final JButton resetButton;
+
+
+    //shape buttons
     private final JButton circleButton;
     private final JButton squareButton;
     private final JButton rectangleButton;
     private final JButton lineSegmentButton;
+    //private final Stack<Command> redoStack = new Stack<>();
+
 
     public Gui() {
         engine = new DrawingEngine();
@@ -58,18 +68,42 @@ public class Gui extends JFrame implements ActionListener  {
         JPanel panel1 = new JPanel();
         panel1.setPreferredSize(new Dimension(150, 200));
         panel1.setLayout(new FlowLayout(FlowLayout.CENTER,20,10));
-        JLabel selectShapeLabel = new JLabel("Select Shape");
         shapeComboBox = new JComboBox<>();
         SelectedShape selectedShape = new SelectedShape();
         shapeComboBox.addItem(selectedShape);
         shapeComboBox.addActionListener(this);
 
-        panel1.add(selectShapeLabel);
-        panel1.add(shapeComboBox);
+        UndoButton = new JButton("Undo");
+        UndoButton.addActionListener(this);
+        UndoButton.setFocusable(false);
+        UndoButton.setPreferredSize(new Dimension(100, 30));
+        UndoButton.setEnabled(false);
+
+        resetButton = new JButton("Reset");
+        resetButton.addActionListener(this);
+        resetButton.setFocusable(false);
+        resetButton.setToolTipText("Reset Cannot be undone");
+        resetButton.setPreferredSize(new Dimension(100, 30));
+
+        saveButton = new JButton("Save");
+        saveButton.addActionListener(this);
+        saveButton.setFocusable(false);
+        saveButton.setPreferredSize(new Dimension(100, 30));
+
+        loadButton = new JButton("Load");
+        loadButton.addActionListener(this);
+        loadButton.setFocusable(false);
+        loadButton.setPreferredSize(new Dimension(100, 30));
+
+        panel1.add(UndoButton);
+        panel1.add(resetButton);
+        panel1.add(saveButton);
+        panel1.add(loadButton);
+
 
         JPanel panel2 = new JPanel();
         panel2.setPreferredSize(new Dimension(150, 800));
-        panel2.setLayout(new FlowLayout(FlowLayout.CENTER,20,30));
+        panel2.setLayout(new FlowLayout(FlowLayout.CENTER,20,20));
         colorizeButton = new JButton("Colorize");
         colorizeButton.addActionListener(this);
         colorizeButton.setFocusable(false);
@@ -80,34 +114,21 @@ public class Gui extends JFrame implements ActionListener  {
         deleteButton.setFocusable(false);
         deleteButton.setPreferredSize(new Dimension(100, 30));
 
-        resetButton = new JButton("Reset");
-        resetButton.addActionListener(this);
-        resetButton.setFocusable(false);
-        resetButton.setToolTipText("Reset Cannot be undone");
-        resetButton.setPreferredSize(new Dimension(100, 30));
 
-        UndoButton = new JButton("Undo");
-        UndoButton.addActionListener(this);
-        UndoButton.setFocusable(false);
-        UndoButton.setPreferredSize(new Dimension(100, 30));
-        UndoButton.setEnabled(false);
 
         resizeButton = new JButton("Resize");
         resizeButton.addActionListener(this);
         resizeButton.setFocusable(false);
         resizeButton.setPreferredSize(new Dimension(100, 30));
 
-
-
         moveButton = new JButton("Move");
         moveButton.addActionListener(this);
         moveButton.setFocusable(false);
         moveButton.setPreferredSize(new Dimension(100, 30));
 
+        panel2.add(shapeComboBox);
         panel2.add(colorizeButton);
         panel2.add(deleteButton);
-        panel2.add(resetButton);
-        panel2.add(UndoButton);
         panel2.add(resizeButton);
         panel2.add(moveButton);
 
@@ -169,30 +190,31 @@ public class Gui extends JFrame implements ActionListener  {
     public void actionPerformed(ActionEvent e) {
 
        if(e.getSource()==squareButton)
-       {
+        {
              new SquareWindow(this);
        }
        if(e.getSource()==rectangleButton)
-       {
+        {
            new RectangleWindow(this);
        }
        if (e.getSource()==circleButton)
-       {
+        {
             new CircleWindow(this);
        }
        if(e.getSource()==lineSegmentButton)
-       {
+        {
            new LineSegmentWindow(this);
        }
        if(e.getSource()==colorizeButton)
-       {
+        {
            if (currentShape == null || currentShape.toString().equals("Select a Shape")) {
                JOptionPane.showMessageDialog(null, "Please select a valid shape", "Warning", JOptionPane.WARNING_MESSAGE);
                return;
            }
            new ColorWindow(this);
        }
-        if (e.getSource() == deleteButton) {
+        if (e.getSource() == deleteButton)
+        {
             if (currentShape == null || currentShape.toString().equals("Select a Shape")) {
                 JOptionPane.showMessageDialog(null, "Please select a valid shape", "Warning", JOptionPane.WARNING_MESSAGE);
                 return;
@@ -202,7 +224,7 @@ public class Gui extends JFrame implements ActionListener  {
             undoStack.push(deleteCommand);
         }
         if (e.getSource()==resetButton)
-       {
+        {
            ResetCommand resetCommand = new ResetCommand(this);
            resetCommand.execute();
            undoStack.push(resetCommand);
@@ -256,6 +278,14 @@ public class Gui extends JFrame implements ActionListener  {
         if (e.getSource()==shapeComboBox)
         {
             this.currentShape = (Shape) shapeComboBox.getSelectedItem();
+        }
+        if (e.getSource()==saveButton)
+        {
+             new GetFileLocation(this,true,false);
+        }
+        if (e.getSource()==loadButton)
+        {
+            new GetFileLocation(this,false,true);
         }
     }
 

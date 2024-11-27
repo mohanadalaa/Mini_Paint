@@ -8,7 +8,7 @@ import java.awt.*;
 
 public class CircleWindow extends javax.swing.JFrame {
 
-   private Gui gui;
+   private final Gui gui;
     public CircleWindow(Gui gui) {
         this.gui = gui;
         initComponents();

@@ -4,7 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 
 public class Panel4 extends JPanel {
-    private DrawingEngine engine;
+    private final DrawingEngine engine;
 
     public Panel4(DrawingEngine engine) {
         this.engine = engine;

@@ -50,7 +50,6 @@ public class ResizeCommand implements Command {
 
     @Override
     public void execute() {
-
         //line segment Condition
         if (this.currentShape.isLineSegment()) {
             this.currentShape.setEndPoint(newEndPoint);
@@ -64,6 +63,7 @@ public class ResizeCommand implements Command {
 
     @Override
     public void undo() {
+        //line segment Condition
         if (this.currentShape.isLineSegment()) {
             this.currentShape.setEndPoint(oldEndPoint);
             this.shapeComboBox.setSelectedIndex(shapeComboBox.getItemCount()-1);

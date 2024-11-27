@@ -62,6 +62,8 @@ public class Rectangle extends Shape {
         return false;
     }
 
+
+
     public String toString() {
         return "Rectangle"+indx;
     }

@@ -6,7 +6,7 @@ import Patterns.ResizeCommand;
 import javax.swing.*;
 
 public class SquareResizeWindow extends javax.swing.JFrame {
-    private Gui gui;
+    private final Gui gui;
 
     public SquareResizeWindow(Gui gui) {
         this.gui = gui;
@@ -19,9 +19,9 @@ public class SquareResizeWindow extends javax.swing.JFrame {
 
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
+        JLabel jLabel1 = new JLabel();
         jTextField1 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        JButton jButton1 = new JButton();
 
 
         jLabel1.setText("Side Length");
@@ -95,7 +95,5 @@ public class SquareResizeWindow extends javax.swing.JFrame {
         this.dispose();
     }
 
-    private javax.swing.JButton jButton1;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JTextField jTextField1;
 }

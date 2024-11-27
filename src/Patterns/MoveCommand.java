@@ -13,14 +13,6 @@ public class MoveCommand implements Command {
     private Point moveEndPoint;
     private Point currentEndPoint;
 
-    //Constructor for the rest of the shapes
-    public MoveCommand( JComboBox<Shape> shapeComboBox, Shape currentShape, Point moveToPoint ) {
-        this.shapeComboBox = shapeComboBox;
-        this.currentShape = currentShape;
-        this.moveToPoint = moveToPoint;
-        this.currentPoint= currentShape.getStartPoint();
-
-    }
     //Constructor for lineSegment
     public MoveCommand( JComboBox<Shape> shapeComboBox, Shape currentShape, Point moveToPoint ,Point endPoint) {
         this.shapeComboBox = shapeComboBox;
@@ -30,6 +22,16 @@ public class MoveCommand implements Command {
         this.moveEndPoint = endPoint;
         this.currentEndPoint = currentShape.getEndPoint();
     }
+
+    //Constructor for the rest of the shapes
+    public MoveCommand( JComboBox<Shape> shapeComboBox, Shape currentShape, Point moveToPoint ) {
+        this.shapeComboBox = shapeComboBox;
+        this.currentShape = currentShape;
+        this.moveToPoint = moveToPoint;
+        this.currentPoint= currentShape.getStartPoint();
+
+    }
+
 
     @Override
     public void execute() {

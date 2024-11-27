@@ -10,7 +10,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 
 public class LineSegmentWindow extends javax.swing.JFrame {
-    private Gui gui;
+    private final Gui gui;
     public LineSegmentWindow(Gui gui) {
         this.gui=gui;
         initComponents();

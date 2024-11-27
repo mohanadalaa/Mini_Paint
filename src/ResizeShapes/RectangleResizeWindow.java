@@ -6,7 +6,7 @@ import Patterns.ResizeCommand;
 import javax.swing.*;
 
 public class RectangleResizeWindow extends javax.swing.JFrame {
-    private Gui gui;
+    private final Gui gui;
     public RectangleResizeWindow(Gui gui) {
         this.gui = gui;
         initComponents();
@@ -18,11 +18,11 @@ public class RectangleResizeWindow extends javax.swing.JFrame {
 
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
+        JLabel jLabel1 = new JLabel();
         jTextField2 = new javax.swing.JTextField();
         jTextField1 = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        JLabel jLabel2 = new JLabel();
+        JButton jButton1 = new JButton();
 
 
         jLabel1.setText("Length");
@@ -129,11 +129,6 @@ public class RectangleResizeWindow extends javax.swing.JFrame {
         this.dispose();
     }
 
-
-
-    private javax.swing.JButton jButton1;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField1;
 }

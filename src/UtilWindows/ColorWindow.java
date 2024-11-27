@@ -10,7 +10,7 @@ import java.awt.*;
 
 public class ColorWindow extends javax.swing.JFrame {
 
-    private Gui gui;
+    private final Gui gui;
     public ColorWindow(Gui gui) {
         this.gui = gui;
         initComponents();

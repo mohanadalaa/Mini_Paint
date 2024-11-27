@@ -10,7 +10,7 @@ import javax.swing.*;
 
 public class RectangleWindow extends javax.swing.JFrame {
 
-    private Gui gui;
+    private final Gui gui;
     public RectangleWindow(Gui gui) {
         this.gui = gui;
         initComponents();

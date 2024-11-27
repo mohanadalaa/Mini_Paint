@@ -1,7 +1,6 @@
 package ResizeShapes;
 
 import GUI.Gui;
-import Patterns.MoveCommand;
 import Patterns.ResizeCommand;
 
 import javax.swing.*;
@@ -9,7 +8,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 
 public class LineSegmentResizeWindow extends javax.swing.JFrame {
-    private Gui gui;
+    private final Gui gui;
 
     public LineSegmentResizeWindow(Gui gui) {
         this.gui = gui;

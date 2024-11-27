@@ -6,7 +6,7 @@ import javax.swing.*;
 import java.awt.*;
 
 public class SquareWindow extends javax.swing.JFrame {
-   private Gui gui;
+   private final Gui gui;
     public SquareWindow(Gui gui) {
         this.gui = gui;
         initComponents();

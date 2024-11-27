@@ -1,10 +1,11 @@
 package Shapes;
 
 import java.awt.*;
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
-public  abstract class Shape implements ShapeInter {
+public  abstract class Shape implements ShapeInter, Serializable {
 
 
     protected Point startPoint;
@@ -72,6 +73,5 @@ public  abstract class Shape implements ShapeInter {
     public abstract boolean isSquare();
     public abstract boolean isRectangle();
     public abstract boolean isCircle();
-
 
 }

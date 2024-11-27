@@ -62,6 +62,7 @@ public class LineSegment extends Shape {
         return false;
     }
 
+
     @Override
     public String toString() {
         return "LineSegment" + indx;
