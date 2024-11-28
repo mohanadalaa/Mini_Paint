@@ -128,7 +128,7 @@ public class ColorWindow extends javax.swing.JFrame {
             colourizeCommand.execute();
             this.gui.undoStack.push(colourizeCommand);
         }
-        this.gui.UndoButton.setEnabled(true);
+
         this.gui.engine.refresh(this.gui.panel4.getGraphics());
         dispose();
     }

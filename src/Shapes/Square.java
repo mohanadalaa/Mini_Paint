@@ -4,15 +4,12 @@ import java.awt.*;
 
 public class Square extends Shape {
 
-    private static  int NUMBER_OF_SQUARES=0;
-    private int indx;
 
     public Square(double length, Point position) {
         super(position);
         properties.put("length", length);
-        indx=NUMBER_OF_SQUARES;
-        NUMBER_OF_SQUARES++;
     }
+
 
     @Override
     public void setEndPoint(Point endPoint) {
@@ -41,28 +38,8 @@ public class Square extends Shape {
     }
 
     @Override
-    public boolean isLineSegment() {
-        return false;
+    public String type() {
+        return "Square";
     }
 
-    @Override
-    public boolean isSquare() {
-        return true;
-    }
-
-    @Override
-    public boolean isRectangle() {
-        return false;
-    }
-
-    @Override
-    public boolean isCircle() {
-        return false;
-    }
-
-
-
-    public String toString() {
-        return "Square"+indx;
-    }
 }

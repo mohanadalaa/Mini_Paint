@@ -10,10 +10,10 @@ import java.util.Map;
 public class ResizeCommand implements Command {
 
 
-    private JComboBox<Shape> shapeComboBox;
-    private Shape currentShape;
+    private final JComboBox<Shape> shapeComboBox;
+    private final Shape currentShape;
 
-    private Map<String, Double> propertiesAfter = new HashMap<>();
+    private final Map<String, Double> propertiesAfter = new HashMap<>();
     private Map<String, Double> propertiesBefore;
 
     private Point newEndPoint;
@@ -32,10 +32,10 @@ public class ResizeCommand implements Command {
     public ResizeCommand( JComboBox<Shape> shapeComboBox, Shape currentShape,int length) {
         this.shapeComboBox = shapeComboBox;
         this.currentShape = currentShape;
-        if(currentShape.isSquare()) {
+        if(currentShape.type().equals("Square")) {
             this.propertiesAfter.put("length", (double) length);
         }
-        if(currentShape.isCircle()) {
+        if(currentShape.type().equals("Circle")) {
             this.propertiesAfter.put("radius", (double) length);
         }
         this.propertiesBefore=this.currentShape.getProperties();
@@ -51,7 +51,7 @@ public class ResizeCommand implements Command {
     @Override
     public void execute() {
         //line segment Condition
-        if (this.currentShape.isLineSegment()) {
+        if (this.currentShape.type().equals("Segment")) {
             this.currentShape.setEndPoint(newEndPoint);
             this.shapeComboBox.setSelectedIndex(shapeComboBox.getItemCount()-1);
             return;
@@ -64,7 +64,7 @@ public class ResizeCommand implements Command {
     @Override
     public void undo() {
         //line segment Condition
-        if (this.currentShape.isLineSegment()) {
+        if (this.currentShape.type().equals("Segment")) {
             this.currentShape.setEndPoint(oldEndPoint);
             this.shapeComboBox.setSelectedIndex(shapeComboBox.getItemCount()-1);
             return;

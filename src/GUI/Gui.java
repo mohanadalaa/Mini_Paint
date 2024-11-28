@@ -46,12 +46,12 @@ public class Gui extends JFrame implements ActionListener  {
     private final JButton deleteButton;
 
 
-    //shape buttons
+    //panel 3 buttons
     private final JButton circleButton;
     private final JButton squareButton;
     private final JButton rectangleButton;
     private final JButton lineSegmentButton;
-    //private final Stack<Command> redoStack = new Stack<>();
+
 
 
     public Gui() {
@@ -77,7 +77,6 @@ public class Gui extends JFrame implements ActionListener  {
         UndoButton.addActionListener(this);
         UndoButton.setFocusable(false);
         UndoButton.setPreferredSize(new Dimension(100, 30));
-        UndoButton.setEnabled(false);
 
         resetButton = new JButton("Reset");
         resetButton.addActionListener(this);
@@ -205,7 +204,7 @@ public class Gui extends JFrame implements ActionListener  {
         {
            new LineSegmentWindow(this);
        }
-       if(e.getSource()==colorizeButton)
+        if(e.getSource()==colorizeButton)
         {
            if (currentShape == null || currentShape.toString().equals("Select a Shape")) {
                JOptionPane.showMessageDialog(null, "Please select a valid shape", "Warning", JOptionPane.WARNING_MESSAGE);
@@ -236,16 +235,16 @@ public class Gui extends JFrame implements ActionListener  {
                 return;
             }
 
-           if (currentShape.isRectangle()) {
+           if (currentShape.type().equals("Rectangle")) {
                new RectangleResizeWindow(this);
            }
-           if (currentShape.isCircle()) {
+           if (currentShape.type().equals("Circle")) {
                new CircleResizeWindow(this);
            }
-           if (currentShape.isLineSegment()) {
+           if (currentShape.type().equals("Segment")) {
                new LineSegmentResizeWindow(this);
            }
-           if (currentShape.isSquare()) {
+           if (currentShape.type().equals("Square")) {
                new SquareResizeWindow(this);
            }
         }
@@ -255,7 +254,7 @@ public class Gui extends JFrame implements ActionListener  {
                 JOptionPane.showMessageDialog(null, "Please select a valid shape", "Warning", JOptionPane.WARNING_MESSAGE);
                 return;
             }
-            if (currentShape.isLineSegment()) {
+            if (currentShape.type().equals("Segment")) {
                 new MoveSegmentWindow(this);
             }
             else {
@@ -269,10 +268,9 @@ public class Gui extends JFrame implements ActionListener  {
                 Command lastCommand = undoStack.pop();
                 lastCommand.undo();
                 this.panel4.repaint();
-                if(undoStack.isEmpty())
-                {
-                    UndoButton.setEnabled(false);
-                }
+            }
+            else{
+                JOptionPane.showMessageDialog(null, "Undo stack is empty");
             }
         }
         if (e.getSource()==shapeComboBox)

@@ -67,11 +67,10 @@ public class GetFileLocation {
 
             if (save) {
                 fileHandler.SaveToFile(); // Save to the selected file
-                JOptionPane.showMessageDialog(null, "Saved to " + filePath);
+
             }
             if (load) {
                 fileHandler.LoadFromFile(); // Load from the selected file
-                JOptionPane.showMessageDialog(null, "Loaded from " + filePath);
             }
         } else {
             // Show an error if the user cancels or closes the dialog

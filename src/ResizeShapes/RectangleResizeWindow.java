@@ -124,7 +124,6 @@ public class RectangleResizeWindow extends javax.swing.JFrame {
         ResizeCommand command = new ResizeCommand(this.gui.shapeComboBox,this.gui.currentShape,width,length);
         command.execute();
         this.gui.undoStack.push(command);
-        this.gui.UndoButton.setEnabled(true);
         this.gui.panel4.repaint();
         this.dispose();
     }

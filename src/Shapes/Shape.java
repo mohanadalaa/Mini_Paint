@@ -7,15 +7,17 @@ import java.util.Map;
 
 public  abstract class Shape implements ShapeInter, Serializable {
 
-
     protected Point startPoint;
     protected Color color;
     protected Color fillColor;
     protected Map<String, Double> properties;
+    protected int indx;
+
     public Shape(Point startPoint) {
         this.startPoint = startPoint;
         this.color = Color.BLACK;
         properties = new HashMap<>();
+        this.indx = 0;
     }
     protected Shape(){
 
@@ -30,11 +32,7 @@ public  abstract class Shape implements ShapeInter, Serializable {
         return this.startPoint;
     }
 
-    @Override
-    public abstract void setEndPoint(Point endPoint) ;
 
-    @Override
-    public abstract Point getEndPoint() ;
 
     @Override
     public void setProperties(Map<String, Double> properties) {
@@ -67,11 +65,26 @@ public  abstract class Shape implements ShapeInter, Serializable {
     }
 
     @Override
+    public abstract void setEndPoint(Point endPoint) ;
+    @Override
+    public abstract Point getEndPoint() ;
+    @Override
     public abstract void  draw(Graphics canvas) ;
+    @Override
+    public abstract String type();
 
-    public abstract boolean isLineSegment();
-    public abstract boolean isSquare();
-    public abstract boolean isRectangle();
-    public abstract boolean isCircle();
+
+    public String toString()
+    {
+        return type()+indx;
+    }
+
+    public int getIndx() {
+        return indx;
+    }
+
+    public void setIndx(int indx) {
+        this.indx = indx;
+    }
 
 }

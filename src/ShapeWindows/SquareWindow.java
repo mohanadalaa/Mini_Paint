@@ -146,7 +146,7 @@ public class SquareWindow extends javax.swing.JFrame {
             jTextField3.setText("");
             return;
         }
-        if (x<0 || y<0  || len<0){
+        if (x<0 || y<0  || len<=0){
             JOptionPane.showMessageDialog(null,
                     "Please enter valid Coordinates and Side Length",
                     "Error",JOptionPane.ERROR_MESSAGE);
@@ -160,7 +160,7 @@ public class SquareWindow extends javax.swing.JFrame {
         CreateCommand command = new CreateCommand(this.gui.engine,this.gui.shapeComboBox,square);
         command.execute();
         this.gui.undoStack.push(command);
-        this.gui.UndoButton.setEnabled(true);
+
         this.gui.engine.refresh(this.gui.panel4.getGraphics());
         this.dispose();
     }

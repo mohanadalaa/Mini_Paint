@@ -7,12 +7,13 @@ import Shapes.Shape;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Stack;
 
 public class ResetCommand implements Command {
 
-    private Gui gui;
+    private final Gui gui;
     private List<Shape> backupShape;
-    private List<Shape> backupComboBoxItems;
+    private final Stack<Command> backupUndoStack= new Stack<>();
 
     public ResetCommand(Gui gui) {
         this.gui = gui;
@@ -25,37 +26,36 @@ public class ResetCommand implements Command {
         if(this.gui.shapeComboBox.getItemCount()==1) return;
 
         backupShape = new ArrayList<>(this.gui.engine.getShapes());
-        backupComboBoxItems = new ArrayList<>();
-        for (int i = 0; i < this.gui.shapeComboBox.getItemCount(); i++) {
-            backupComboBoxItems.add(this.gui.shapeComboBox.getItemAt(i));
-        }
 
         // now i have the shapes backed up for future use
-
-        this.gui.engine.getShapes().clear();
+        this.gui.engine.clearTheList();
         this.gui.shapeComboBox.removeAllItems();
         this.gui.shapeComboBox.addItem(new SelectedShape());
         this.gui.shapeComboBox.setSelectedIndex(this.gui.shapeComboBox.getItemCount() - 1);
         this.gui.panel4.repaint();
+
+        while (!this.gui.undoStack.isEmpty())
+            this.backupUndoStack.push(this.gui.undoStack.pop());
 
 
     }
 
     @Override
     public void undo() {
-        if (backupShape != null && backupComboBoxItems != null) { //
-            this.gui.engine.getShapes().clear();
-            this.gui.engine.getShapes().addAll(backupShape);
-
+        if (backupShape != null) {
+            this.gui.engine.clearTheList();
             this.gui.shapeComboBox.removeAllItems();
-            for (Shape shape : backupComboBoxItems) {
-                this.gui.shapeComboBox.addItem(shape);
+            for (Shape shape : backupShape) {
+                this.gui.engine.addShape(shape);
+                this.gui.shapeComboBox.insertItemAt(shape,0);
             }
-
-            if (!backupComboBoxItems.isEmpty()) {
-                this.gui.shapeComboBox.setSelectedIndex(backupComboBoxItems.size() - 1);
-            }
+            this.gui.shapeComboBox.addItem(new SelectedShape());
+            this.gui.shapeComboBox.setSelectedIndex(this.gui.shapeComboBox.getItemCount() - 1);
             this.gui.panel4.repaint();
+
+            while (!this.backupUndoStack.isEmpty())
+                this.gui.undoStack.push(this.backupUndoStack.pop());
+
         }
     }
 }

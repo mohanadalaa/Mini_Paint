@@ -4,11 +4,11 @@ import javax.swing.*;
 import java.awt.*;
 
 public class MoveCommand implements Command {
-    private Shape currentShape;
-    private JComboBox<Shape> shapeComboBox;
+    private final Shape currentShape;
+    private final JComboBox<Shape> shapeComboBox;
 
-    private Point moveToPoint;
-    private Point currentPoint;
+    private final Point moveToPoint;
+    private final Point currentPoint;
 
     private Point moveEndPoint;
     private Point currentEndPoint;
@@ -36,7 +36,7 @@ public class MoveCommand implements Command {
     @Override
     public void execute() {
 
-        if (this.currentShape.isLineSegment()) {
+        if (this.currentShape.type().equals("Segment")) {
             this.currentShape.setStartPoint(moveToPoint);
             this.currentShape.setEndPoint(moveEndPoint);
             this.shapeComboBox.setSelectedIndex(shapeComboBox.getItemCount()-1);
@@ -48,7 +48,7 @@ public class MoveCommand implements Command {
 
     @Override
     public void undo() {
-        if(this.currentShape.isLineSegment()){
+        if(this.currentShape.type().equals("Segment")){
             this.currentShape.setStartPoint(currentPoint);
             this.currentShape.setEndPoint(currentEndPoint);
             this.shapeComboBox.setSelectedIndex(shapeComboBox.getItemCount()-1);

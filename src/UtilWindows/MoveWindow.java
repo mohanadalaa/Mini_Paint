@@ -128,7 +128,6 @@ public class MoveWindow extends javax.swing.JFrame {
         MoveCommand command = new MoveCommand(this.gui.shapeComboBox, this.gui.currentShape,new Point(x,y),null);
         command.execute();
         this.gui.undoStack.push(command);
-        this.gui.UndoButton.setEnabled(true);
         this.gui.panel4.repaint();
         this.dispose();
     }

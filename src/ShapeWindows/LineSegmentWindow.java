@@ -173,7 +173,7 @@ public class LineSegmentWindow extends javax.swing.JFrame {
         CreateCommand command = new CreateCommand(this.gui.engine,this.gui.shapeComboBox,segment);
         command.execute();
         this.gui.undoStack.push(command);
-        this.gui.UndoButton.setEnabled(true);
+
         this.gui.engine.refresh(this.gui.panel4.getGraphics());
         this.dispose();
     }

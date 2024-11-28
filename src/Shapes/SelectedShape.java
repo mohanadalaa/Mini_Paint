@@ -22,24 +22,12 @@ public class SelectedShape extends Shape {
     }
 
     @Override
-    public boolean isLineSegment() {
-        return false;
+    public String type() {
+        return null;
     }
 
-    @Override
-    public boolean isSquare() {
-        return false;
-    }
 
-    @Override
-    public boolean isRectangle() {
-        return false;
-    }
 
-    @Override
-    public boolean isCircle() {
-        return false;
-    }
 
 
     public String toString()

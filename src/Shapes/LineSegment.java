@@ -5,8 +5,7 @@ import java.awt.*;
 
 public class LineSegment extends Shape {
 
-    private static int NUMBER_OF_LINE_SEGMENTS = 0;
-    private int indx;
+
     private Point endPoint;
 
 
@@ -14,8 +13,7 @@ public class LineSegment extends Shape {
        super(startPoint);
         this.endPoint = endPoint;
         properties.put("length", startPoint.distance(endPoint));
-        indx = NUMBER_OF_LINE_SEGMENTS;
-        NUMBER_OF_LINE_SEGMENTS++;
+
     }
     @Override
     public void setFillColor(Color color) {
@@ -43,28 +41,12 @@ public class LineSegment extends Shape {
     }
 
     @Override
-    public boolean isLineSegment() {
-        return true;
-    }
-
-    @Override
-    public boolean isSquare() {
-        return false;
-    }
-
-    @Override
-    public boolean isRectangle() {
-        return false;
-    }
-
-    @Override
-    public boolean isCircle() {
-        return false;
+    public String type() {
+        return "Segment";
     }
 
 
-    @Override
-    public String toString() {
-        return "LineSegment" + indx;
-    }
+
+
+
 }

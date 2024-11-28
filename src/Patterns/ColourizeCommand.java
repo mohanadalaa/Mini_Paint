@@ -4,12 +4,12 @@ import javax.swing.*;
 import java.awt.*;
 
 public class ColourizeCommand implements Command {
-    private JComboBox<Shape> shapeComboBox;
-    private Shape currentShape;
-    private Color currentInnerColor;
-    private Color currentOuterColor;
-    private Color nextInnerColor;
-    private Color nextOuterColor;
+    private final JComboBox<Shape> shapeComboBox;
+    private final Shape currentShape;
+    private final Color currentInnerColor;
+    private final Color currentOuterColor;
+    private final Color nextInnerColor;
+    private final Color nextOuterColor;
     public ColourizeCommand(
                             JComboBox<Shape> shapeComboBox,
                             Shape currentShape,

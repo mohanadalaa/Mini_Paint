@@ -5,15 +5,11 @@ import java.awt.*;
 
 public class Circle extends Shape {
 
-    private static  int NUMBER_OF_CIRCLES=0;
-    private int indx;
 
     public Circle(double radius,Point position)
     {
         super(position);
         this.properties.put("radius", radius);
-        this.indx=NUMBER_OF_CIRCLES;
-        NUMBER_OF_CIRCLES++;
     }
 
     @Override
@@ -46,28 +42,7 @@ public class Circle extends Shape {
     }
 
     @Override
-    public boolean isLineSegment() {
-        return false;
+    public String type() {
+        return "Circle";
     }
-
-    @Override
-    public boolean isSquare() {
-        return false;
-    }
-
-    @Override
-    public boolean isRectangle() {
-        return false;
-    }
-
-    @Override
-    public boolean isCircle() {
-        return true;
-    }
-
-
-    public String toString() {
-        return "Circle"+indx;
-    }
-
 }

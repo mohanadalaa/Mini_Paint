@@ -5,15 +5,12 @@ import java.awt.*;
 
 public class Rectangle extends Shape {
 
-    private static  int NUMBER_OF_RECTANGLES=0;
-    private int indx;
+
 
     public Rectangle(double height,double width, Point position) {
         super(position);
         this.properties.put("height", height);
         this.properties.put("width", width);
-        indx=NUMBER_OF_RECTANGLES;
-        NUMBER_OF_RECTANGLES++;
     }
 
     @Override
@@ -43,28 +40,8 @@ public class Rectangle extends Shape {
     }
 
     @Override
-    public boolean isLineSegment() {
-        return false;
+    public String type() {
+        return "Rectangle";
     }
 
-    @Override
-    public boolean isSquare() {
-        return false;
-    }
-
-    @Override
-    public boolean isRectangle() {
-        return true;
-    }
-
-    @Override
-    public boolean isCircle() {
-        return false;
-    }
-
-
-
-    public String toString() {
-        return "Rectangle"+indx;
-    }
 }

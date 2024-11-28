@@ -148,7 +148,7 @@ public class CircleWindow extends javax.swing.JFrame {
             jTextField3.setText("");
             return;
         }
-        if (x<0 || y<0  || rad<0){
+        if (x<0 || y<0  || rad<=0){
             JOptionPane.showMessageDialog(null,
                     "Please enter valid Coordinates and Radius",
                     "Error",JOptionPane.ERROR_MESSAGE);
@@ -162,7 +162,7 @@ public class CircleWindow extends javax.swing.JFrame {
         CreateCommand command = new CreateCommand(this.gui.engine,this.gui.shapeComboBox,circle);
         command.execute();
         this.gui.undoStack.push(command);
-        this.gui.UndoButton.setEnabled(true);
+
         this.gui.engine.refresh(this.gui.panel4.getGraphics());
         this.dispose();
     }

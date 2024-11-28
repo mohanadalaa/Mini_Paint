@@ -171,7 +171,6 @@ public class MoveSegmentWindow extends javax.swing.JFrame {
         MoveCommand command = new MoveCommand(this.gui.shapeComboBox,this.gui.currentShape,startPoint,endPoint);
         command.execute();
         this.gui.undoStack.push(command);
-        this.gui.UndoButton.setEnabled(true);
         this.gui.panel4.repaint();
         this.dispose();
     }

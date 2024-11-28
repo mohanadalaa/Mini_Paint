@@ -8,9 +8,9 @@ import javax.swing.*;
 public class CreateCommand implements Command {
 
 
-    private DrawingEngine engine;
-    private JComboBox<Shape> shapeComboBox;
-    private Shape currentShape;
+    private final DrawingEngine engine;
+    private final JComboBox<Shape> shapeComboBox;
+    private final Shape currentShape;
     public CreateCommand(DrawingEngine engine, JComboBox<Shape> shapeComboBox, Shape currentShape) {
         this.engine = engine;
         this.shapeComboBox = shapeComboBox;
