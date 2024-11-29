@@ -11,13 +11,13 @@ public  abstract class Shape implements ShapeInter, Serializable {
     protected Color color;
     protected Color fillColor;
     protected Map<String, Double> properties;
-    protected int indx;
+    protected int index;
 
     public Shape(Point startPoint) {
         this.startPoint = startPoint;
         this.color = Color.BLACK;
         properties = new HashMap<>();
-        this.indx = 0;
+        this.index = 0;
     }
     protected Shape(){
 
@@ -65,26 +65,30 @@ public  abstract class Shape implements ShapeInter, Serializable {
     }
 
     @Override
-    public abstract void setEndPoint(Point endPoint) ;
+    public  void setEndPoint(Point endPoint) {
+
+    }
     @Override
-    public abstract Point getEndPoint() ;
+    public  Point getEndPoint() {
+        return null;
+    }
+
     @Override
     public abstract void  draw(Graphics canvas) ;
     @Override
     public abstract String type();
 
-
     public String toString()
     {
-        return type()+indx;
+        return type()+index;
     }
 
-    public int getIndx() {
-        return indx;
+    public int getIndex() {
+        return index;
     }
 
-    public void setIndx(int indx) {
-        this.indx = indx;
+    public void setIndex(int index) {
+        this.index = index;
     }
 
 }

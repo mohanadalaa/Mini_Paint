@@ -79,7 +79,7 @@ public class SquareResizeWindow extends javax.swing.JFrame {
             validLength = false;
         }
 
-        if (!validLength || sideLength < 0) {
+        if (!validLength || sideLength <= 0) {
             JOptionPane.showMessageDialog(null,
                     "Please enter a valid Side Length",
                     "Error", JOptionPane.ERROR_MESSAGE);

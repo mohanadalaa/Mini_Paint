@@ -16,6 +16,7 @@ public class ResizeCommand implements Command {
     private final Map<String, Double> propertiesAfter = new HashMap<>();
     private Map<String, Double> propertiesBefore;
 
+    //lineSegment variables
     private Point newEndPoint;
     private Point oldEndPoint;
 

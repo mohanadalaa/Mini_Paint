@@ -112,7 +112,7 @@ public class RectangleResizeWindow extends javax.swing.JFrame {
             jTextField2.setText("");
             return;
         }
-        if (length<0 || width<0 ){
+        if (length<=0 || width<=0 ){
             JOptionPane.showMessageDialog(null,
                     "Please enter valid Length and Width",
                     "Error",JOptionPane.ERROR_MESSAGE);

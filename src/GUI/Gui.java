@@ -1,21 +1,11 @@
 package GUI;
-
 import Engine.DrawingEngine;
-import Patterns.Command;
-import Patterns.DeleteCommand;
-import Patterns.ResetCommand;
-import ResizeShapes.CircleResizeWindow;
-import ResizeShapes.LineSegmentResizeWindow;
-import ResizeShapes.RectangleResizeWindow;
-import ResizeShapes.SquareResizeWindow;
-import ShapeWindows.CircleWindow;
-import ShapeWindows.LineSegmentWindow;
-import ShapeWindows.RectangleWindow;
-import ShapeWindows.SquareWindow;
+import Patterns.*;
+import ResizeShapes.*;
+import ShapeWindows.*;
 import Shapes.*;
 import Shapes.Shape;
 import UtilWindows.*;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -30,9 +20,11 @@ public class Gui extends JFrame implements ActionListener  {
     public Shape currentShape;
     public  Panel4 panel4;
     public Stack<Command> undoStack = new Stack<>();
+    public Stack<Command> redoStack = new Stack<>();
 
     //panel 1 variables
     public JButton UndoButton;
+    public JButton RedoButton;
     public JComboBox<Shape> shapeComboBox;
     private final JButton resetButton;
     private final JButton saveButton;
@@ -62,11 +54,11 @@ public class Gui extends JFrame implements ActionListener  {
         frame.setLayout(new BorderLayout());
 
         JPanel panel = new JPanel();
-        panel.setPreferredSize(new Dimension(150, 500));
+        panel.setPreferredSize(new Dimension(150, 800));
         panel.setLayout(new FlowLayout(FlowLayout.CENTER));
 
         JPanel panel1 = new JPanel();
-        panel1.setPreferredSize(new Dimension(150, 200));
+        panel1.setPreferredSize(new Dimension(150, 300));
         panel1.setLayout(new FlowLayout(FlowLayout.CENTER,20,10));
         shapeComboBox = new JComboBox<>();
         SelectedShape selectedShape = new SelectedShape();
@@ -77,6 +69,11 @@ public class Gui extends JFrame implements ActionListener  {
         UndoButton.addActionListener(this);
         UndoButton.setFocusable(false);
         UndoButton.setPreferredSize(new Dimension(100, 30));
+
+        RedoButton = new JButton("Redo");
+        RedoButton.addActionListener(this);
+        RedoButton.setFocusable(false);
+        RedoButton.setPreferredSize(new Dimension(100, 30));
 
         resetButton = new JButton("Reset");
         resetButton.addActionListener(this);
@@ -95,13 +92,14 @@ public class Gui extends JFrame implements ActionListener  {
         loadButton.setPreferredSize(new Dimension(100, 30));
 
         panel1.add(UndoButton);
+        panel1.add(RedoButton);
         panel1.add(resetButton);
         panel1.add(saveButton);
         panel1.add(loadButton);
 
 
         JPanel panel2 = new JPanel();
-        panel2.setPreferredSize(new Dimension(150, 800));
+        panel2.setPreferredSize(new Dimension(150, 600));
         panel2.setLayout(new FlowLayout(FlowLayout.CENTER,20,20));
         colorizeButton = new JButton("Colorize");
         colorizeButton.addActionListener(this);
@@ -188,19 +186,19 @@ public class Gui extends JFrame implements ActionListener  {
     @Override
     public void actionPerformed(ActionEvent e) {
 
-       if(e.getSource()==squareButton)
+        if(e.getSource()==squareButton)
         {
              new SquareWindow(this);
        }
-       if(e.getSource()==rectangleButton)
+        if(e.getSource()==rectangleButton)
         {
            new RectangleWindow(this);
        }
-       if (e.getSource()==circleButton)
+        if (e.getSource()==circleButton)
         {
             new CircleWindow(this);
        }
-       if(e.getSource()==lineSegmentButton)
+        if(e.getSource()==lineSegmentButton)
         {
            new LineSegmentWindow(this);
        }
@@ -268,9 +266,23 @@ public class Gui extends JFrame implements ActionListener  {
                 Command lastCommand = undoStack.pop();
                 lastCommand.undo();
                 this.panel4.repaint();
+                this.redoStack.push(lastCommand);
             }
             else{
                 JOptionPane.showMessageDialog(null, "Undo stack is empty");
+            }
+        }
+        if (e.getSource()==RedoButton)
+        {
+            if (!redoStack.isEmpty())
+            {
+                Command lastCommand = redoStack.pop();
+                lastCommand.execute();
+                this.undoStack.push(lastCommand);
+                this.panel4.repaint();
+            }
+            else{
+                JOptionPane.showMessageDialog(null, "Redo stack is empty");
             }
         }
         if (e.getSource()==shapeComboBox)
@@ -283,7 +295,7 @@ public class Gui extends JFrame implements ActionListener  {
         }
         if (e.getSource()==loadButton)
         {
-            new GetFileLocation(this,false,true);
+            new GetFileLocation(this, false, true);
         }
     }
 

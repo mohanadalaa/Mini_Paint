@@ -45,8 +45,4 @@ public class LineSegment extends Shape {
         return "Segment";
     }
 
-
-
-
-
 }

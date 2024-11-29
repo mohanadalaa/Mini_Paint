@@ -78,7 +78,7 @@ public class CircleResizeWindow extends javax.swing.JFrame {
             validRadius = false;
         }
 
-        if (!validRadius || radius < 0) {
+        if (!validRadius || radius <= 0) {
             JOptionPane.showMessageDialog(null,
                     "Please enter a valid  Radius",
                     "Error", JOptionPane.ERROR_MESSAGE);

@@ -10,17 +10,6 @@ public class Square extends Shape {
         properties.put("length", length);
     }
 
-
-    @Override
-    public void setEndPoint(Point endPoint) {
-
-    }
-
-    @Override
-    public Point getEndPoint() {
-        return null;
-    }
-
     @Override
     public void draw(Graphics canvas) {
         int length = (int)this.properties.get("length").doubleValue();

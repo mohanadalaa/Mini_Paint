@@ -13,16 +13,6 @@ public class Circle extends Shape {
     }
 
     @Override
-    public void setEndPoint(Point endPoint) {
-
-    }
-
-    @Override
-    public Point getEndPoint() {
-        return null;
-    }
-
-    @Override
     public void draw(Graphics canvas) {
         double radius = this.properties.get("radius");
         double x = this.startPoint.x - radius;

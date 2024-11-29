@@ -4,8 +4,10 @@ import java.util.ArrayList;
 
 public class DrawingEngine implements Engine{
 
-    private  ArrayList<Shape> list;
+    //List of the shapes
+    private final  ArrayList<Shape> list;
 
+    //counter for the shapes
     private int Number_Of_Circles=0;
     private int Number_Of_Rectangles=0;
     private int Number_Of_Squares=0;
@@ -21,41 +23,42 @@ public class DrawingEngine implements Engine{
     public void addShape(Shape shape) {
         switch (shape.type()) {
             case "Circle":
-                shape.setIndx(Number_Of_Circles);
+                shape.setIndex(Number_Of_Circles);
                 Number_Of_Circles++;
                 break;
             case "Rectangle":
-                shape.setIndx(Number_Of_Rectangles);
+                shape.setIndex(Number_Of_Rectangles);
                 Number_Of_Rectangles++;
                 break;
             case "Square":
-                shape.setIndx(Number_Of_Squares);
+                shape.setIndex(Number_Of_Squares);
                 Number_Of_Squares++;
                 break;
             case "Segment":
-                shape.setIndx(Number_Of_Segments);
+                shape.setIndex(Number_Of_Segments);
                 Number_Of_Segments++;
                 break;
         }
         this.list.add(shape);
     }
 
+    //add shape at specific index used in undo deletion command
     public void addShape(Shape shape,int index) {
         switch (shape.type()) {
             case "Circle":
-                shape.setIndx(Number_Of_Circles);
+                shape.setIndex(Number_Of_Circles);
                 Number_Of_Circles++;
                 break;
             case "Rectangle":
-                shape.setIndx(Number_Of_Rectangles);
+                shape.setIndex(Number_Of_Rectangles);
                 Number_Of_Rectangles++;
                 break;
             case "Square":
-                shape.setIndx(Number_Of_Squares);
+                shape.setIndex(Number_Of_Squares);
                 Number_Of_Squares++;
                 break;
             case "Segment":
-                shape.setIndx(Number_Of_Segments);
+                shape.setIndex(Number_Of_Segments);
                 Number_Of_Segments++;
                 break;
         }
@@ -85,15 +88,17 @@ public class DrawingEngine implements Engine{
             }
 
     }
+    //to keep the list well indexed
     private void reindexShapes(String type) {
-        int currentIndex = 0; // Start reindexing from 0
+        int currentIndex = 0;
         for (Shape s : this.list) {
             if (s.type().equals(type)) {
-                s.setIndx(currentIndex); // Update the index for shapes of the given type
-                currentIndex++; // Increment the index
+                s.setIndex(currentIndex);
+                currentIndex++;
             }
         }
     }
+    //clear the list and reset the counters
     public void clearTheList()
     {
         Number_Of_Circles=0;
