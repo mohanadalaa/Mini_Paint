@@ -278,8 +278,8 @@ public class Gui extends JFrame implements ActionListener  {
             {
                 Command lastCommand = redoStack.pop();
                 lastCommand.execute();
-                this.undoStack.push(lastCommand);
                 this.panel4.repaint();
+                this.undoStack.push(lastCommand);
             }
             else{
                 JOptionPane.showMessageDialog(null, "Redo stack is empty");
