@@ -178,7 +178,7 @@ public class Gui extends JFrame implements ActionListener  {
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
 
-
+        System.out.println("Frame created");
         System.out.println(panel4.getWidth());
         System.out.println(panel4.getHeight());
     }
